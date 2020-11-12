@@ -7,9 +7,9 @@ function FriendCard(props) {
   return (
     <div className = "container">
       {props.friends.map(friend=> (
-        <div className="card" key = {friend.id} onClick = {props.clicked}>
+        <div className="card" id = {friend.id} key = {friend.id} onClick = {props.clicked}>
         <div className="img-container">
-        <img src={friend.image} />
+        <img src={friend.image} id = {friend.id} />
         </div>
         </div>
       ))};

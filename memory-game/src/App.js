@@ -14,35 +14,47 @@ class App extends Component {
 
   addPoints = (id) => {
     // We always use the setState method to update a component's state
+    console.log("adding");
     this.setState({ points: this.state.points + 10 });
+    console.log(id);
     this.state.clickedCharIds.push(id);
+    console.log(this.state.clickedCharIds);
 };
 
   losePoints = () => {
     // We always use the setState method to update a component's state
-    if (this.state.highscore < this.state.points) {
-        this.setState({ highscore: this.state.count });
+    if (this.state.highscore <= this.state.points) {
+        this.setState({ highscore: this.state.points });
     }
     this.setState({ points: 0 });
     this.setState({clickedCharIds: []})
 }
 
 clicked = (id) => {
-  // console.log(this.state.clickedCharIds);
+  var operation = false;
+  console.log(this.state.clickedCharIds);
   for(var i = 0; i < this.state.clickedCharIds.length ; i++){
-    if(this.state.clickedCharIds[i]===id){
+    if(this.state.clickedCharIds[i]===id.target.id){
       console.log("removing");
-      this.losePoints(id);
+      operation = true;
+      this.losePoints(id.target.id);
     }
   }
-  this.addPoints(id);
+  console.log(id.target.id);
+  if(operation === false){
+  this.addPoints(id.target.id);
+  }
 }
 
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
+    console.log(this.state.highscore);
     return (
       <Wrapper>
       <Title>Memory Game</Title>
+    <h1>Points: {this.state.points}</h1>
+    <h2>highscore: {this.state.highscore}</h2>
+      <hr></hr>
       <FriendCard friends = {this.state.friends} addPoints = {this.addPoints} losePoints = {this.losePoints} clickedCharPoints = {this.clickedCharIds} clicked = {this.clicked} />
       </Wrapper>
     );
