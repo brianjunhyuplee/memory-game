@@ -3,9 +3,6 @@ import FriendCard from "./components/FriendCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import friends from "./friends.json";
-
-
-var points = 0;
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
@@ -15,17 +12,10 @@ class App extends Component {
     clickedCharIds : []
   };
 
-  // clickIt = id => {
-  //   // Filter this.state.friends for friends with an id not equal to the id being removed
-  //   const friends = this.state.friends.filter(friend => friend.id !== id);
-  //   // Set this.state.friends equal to the new friends array
-  //   this.setState({ friends: friends });
-  // };
-
   addPoints = (id) => {
     // We always use the setState method to update a component's state
-    this.setState({ points: this.state.points + 1 });
-    this.setState({ clickedCharIds: clickedCharIds.push(id)});
+    this.setState({ points: this.state.points + 10 });
+    this.state.clickedCharIds.push(id);
 };
 
   losePoints = () => {
@@ -34,6 +24,18 @@ class App extends Component {
         this.setState({ highscore: this.state.count });
     }
     this.setState({ points: 0 });
+    this.setState({clickedCharIds: []})
+}
+
+clicked = (id) => {
+  // console.log(this.state.clickedCharIds);
+  for(var i = 0; i < this.state.clickedCharIds.length ; i++){
+    if(this.state.clickedCharIds[i]===id){
+      console.log("removing");
+      this.losePoints(id);
+    }
+  }
+  this.addPoints(id);
 }
 
   // Map over this.state.friends and render a FriendCard component for each friend object
@@ -41,7 +43,7 @@ class App extends Component {
     return (
       <Wrapper>
       <Title>Memory Game</Title>
-      <FriendCard friends = {this.state.friends} addPoints = {this.addPoints} losePoints = {this.losePoints} clickedCharPoints = {this.clickedCharIds} />
+      <FriendCard friends = {this.state.friends} addPoints = {this.addPoints} losePoints = {this.losePoints} clickedCharPoints = {this.clickedCharIds} clicked = {this.clicked} />
       </Wrapper>
     );
   }
