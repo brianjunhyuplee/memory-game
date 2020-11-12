@@ -38,7 +38,7 @@ This file will include the general layout of the HTML page as well as some impor
 
 State defines some important variables such as user current score count, current high score, and previously clicked cards. An imported JSON file will also be declared here so that it can be called to create all the cards.
 
-*this can be done with the cod below*
+*this can be done with the code below*
 ```js
 state = {
     cards : jsonfile,
@@ -52,67 +52,22 @@ state = {
 
 Three important functions were implemented for this specific app. The clicked function would check to see if the currently clicked card matches any that have been clicked before. If it has not been clicked before, the function addPoints would be called.
 
-### server.js and connection.js
+In the addPoints function, using this.setState(), the point count should be updated. The current card id should also be added to the array using a push.
 
-These two files will be used to link to the website.
-Method will not be detailed in this README as it has been covered in previous repositories.
+If the card clicked matches one within the array, the function losePoints would be called. In losePoints, similar but opposite operations would be run.
 
-### Making Template HTMLs Using Handlebars
+#### render
 
-#### main.handlebars
+Render should return everthing the program would want within the HTML, this is where components will be called
 
-This is the main template for the HTML. Create head section of html and leave body mostly blank.
+### Components
 
-*By using the below code, the contents of body can be inputted later*
-```bash
-<body>
-	{{{ body }}}
-</body>
-```
+Components are similar to partials in handlebars. It will take in information and spit it back out in HTML formatting. The most important component in this app was the card component.
 
-src tags can be added to this for further styling and functionality (js and css)
+When the card component is called within the App.js file, it will take states declared earlier within the program. By doing so, the app is able to pass in elements and functions to the card component.
 
-#### index.handlebars
+Within the card component, a map can be called to create an HTML for each card that needs to be created. Within creation, the app should take in the clicked function so that each card is clickable. When the card is clicked, that specific card will run the clicked function and run the aforementioned functions.
 
-This file will set the main contents of body for the website. It will fill the "body" portion of the HTML.
-
-As seen in the main.handlebars file, there should be sections for later inputs within the index as well. Also by utilizing # a comparison can be called.
-
-*The below image shows some implementations*
-
-![image of handlebars usage](public/assets/images/index.png)
-
-#### burger-block.handlebars
-
-This file prints a list of burgers based on whether they have been consumed or not.
-
-### Orm
-
-Require the previously created connection.js file. Two initial functions are created to ease some processes that will be performed multiple times
-
-- printQuestionMarks(num) takes in a number and adds that number of question marks to the query string
-
-- objToSql(ob) takes the value in a colimn and concacts it and makes it readable for the query string
-
-**Three main functions are defined to be used in a different file.**
-
-- selectAll: This function takes the table and returns all values from the the table
-
-- insertOne: This function inserts one row to the table by using putting together different elements called in the parameter of the function. These elements are used for the query string
-
-- updateOne: This function takes a condition, finds the object that matches the condition, and changes its value(s)
-
-### Controller
-
-The controller file takes in express, router and a file called burger.js which will be explained later.
-
-This file connects the handlebars with the burger.js file to insert appropriate elements.
-
-By using the functions stated in the Orm section, it can pass in parameters from the HTML and give out a response.
-
-### Model(burger.js)
-
-This file connects Orm with the controller. It will define the functions stated in orm.js and preset the table formatting for desireable results.
 
 ## License
 
