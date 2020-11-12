@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import FriendCard from "./components/FriendCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
+import Scoreboard from "./components/Scoreboard";
 import friends from "./friends.json";
+
+
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
@@ -35,7 +38,6 @@ clicked = (id) => {
   console.log(this.state.clickedCharIds);
   for(var i = 0; i < this.state.clickedCharIds.length ; i++){
     if(this.state.clickedCharIds[i]===id.target.id){
-      console.log("removing");
       operation = true;
       this.losePoints(id.target.id);
     }
@@ -52,9 +54,7 @@ clicked = (id) => {
     return (
       <Wrapper>
       <Title>Memory Game</Title>
-    <h1>Points: {this.state.points}</h1>
-    <h2>highscore: {this.state.highscore}</h2>
-      <hr></hr>
+      <Scoreboard points = {this.state.points} highscore = {this.state.highscore}/>
       <FriendCard friends = {this.state.friends} addPoints = {this.addPoints} losePoints = {this.losePoints} clickedCharPoints = {this.clickedCharIds} clicked = {this.clicked} />
       </Wrapper>
     );
