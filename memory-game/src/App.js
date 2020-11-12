@@ -3,7 +3,9 @@ import FriendCard from "./components/FriendCard";
 import Wrapper from "./components/Wrapper";
 import Title from "./components/Title";
 import friends from "./friends.json";
+import Points from "./components/Points"
 
+var points = 0;
 class App extends Component {
   // Setting this.state.friends to the friends json array
   state = {
@@ -21,7 +23,8 @@ class App extends Component {
   render() {
     return (
       <Wrapper>
-        <Title>Friends List</Title>
+        <Title>Memory Game</Title>
+        <Points></Points>
         {this.state.friends.map(friend => (
           <FriendCard
             removeFriend={this.removeFriend}

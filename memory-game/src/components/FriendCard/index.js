@@ -7,7 +7,7 @@ function FriendCard(props) {
       <div className="img-container">
         <img alt={props.name} src={props.image} />
       </div>
-      <div className="content">
+      {/* <div className="content">
         <ul>
           <li>
             <strong>Name:</strong> {props.name}
@@ -22,7 +22,7 @@ function FriendCard(props) {
       </div>
       <span onClick={() => props.removeFriend(props.id)} className="remove">
         𝘅
-      </span>
+      </span> */}
     </div>
   );
 }
