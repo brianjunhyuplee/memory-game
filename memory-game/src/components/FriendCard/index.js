@@ -1,8 +1,10 @@
 import React from "react";
 import "./style.css";
+import "/Points"
 
 function FriendCard(props) {
   return (
+    <span onClick = {() =>props.clicked(props.id)} className = "remove">
     <div className="card">
       <div className="img-container">
         <img alt={props.name} src={props.image} />
@@ -22,8 +24,9 @@ function FriendCard(props) {
       </div>
       <span onClick={() => props.removeFriend(props.id)} className="remove">
         𝘅
-      </span> */}
+      </span> */} 
     </div>
+    </span>
   );
 }
 
