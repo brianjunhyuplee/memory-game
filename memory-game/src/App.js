@@ -46,6 +46,20 @@ clicked = (id) => {
   if(operation === false){
   this.addPoints(id.target.id);
   }
+  shuffle();
+}
+
+shuffle = () => {
+  var newArr = [];
+  var usedIndex = [];
+  for (let i = 0; i < this.state.friends.length * 2; i++){
+    let rand = Math.floor(Math.random()*this.state.friends.length);
+    while (usedIndex.indexOf(rand)){
+      rand = Math.floor(Math.random()*this.state.friends.length);
+    }
+    newArr.push(this.state.friends[rand]);
+    usedIndex.push(rand);
+  }
 }
 
   // Map over this.state.friends and render a FriendCard component for each friend object
