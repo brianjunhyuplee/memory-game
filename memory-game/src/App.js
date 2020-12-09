@@ -32,6 +32,25 @@ class App extends Component {
     this.setState({ points: 0 });
     this.setState({clickedCharIds: []})
 }
+shuffle=()=> {
+  console.log("shuffling");
+  var newArr = [];
+  var usedIndex = [];
+  for (let i = 0; i < this.state.friends.length; i++){
+    let rand = Math.floor(Math.random()*this.state.friends.length);
+    console.log(rand); 
+    console.log(usedIndex.indexOf(rand));
+    while (usedIndex.indexOf(rand)!==-1){
+      rand = Math.floor(Math.random()*this.state.friends.length);
+      console.log(rand);
+      console.log("while");
+    }
+    console.log(this.state.friends[rand]);
+    newArr.push(this.state.friends[rand]);
+    usedIndex.push(rand);
+  }
+  this.setState({ friends : newArr });
+}
 
 clicked = (id) => {
   var operation = false;
@@ -46,21 +65,20 @@ clicked = (id) => {
   if(operation === false){
   this.addPoints(id.target.id);
   }
-  shuffle();
+  this.shuffle();
+  // var newArr = [];
+  // var usedIndex = [];
+  // for (let i = 0; i < this.state.friends.length * 2; i++){
+  //   let rand = Math.floor(Math.random()*this.state.friends.length);
+  //   while (usedIndex.indexOf(rand)){
+  //     rand = Math.floor(Math.random()*this.state.friends.length);
+  //   }
+  //   newArr.push(this.state.friends[rand]);
+  //   usedIndex.push(rand);
+  // }
 }
 
-shuffle = () => {
-  var newArr = [];
-  var usedIndex = [];
-  for (let i = 0; i < this.state.friends.length * 2; i++){
-    let rand = Math.floor(Math.random()*this.state.friends.length);
-    while (usedIndex.indexOf(rand)){
-      rand = Math.floor(Math.random()*this.state.friends.length);
-    }
-    newArr.push(this.state.friends[rand]);
-    usedIndex.push(rand);
-  }
-}
+
 
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
